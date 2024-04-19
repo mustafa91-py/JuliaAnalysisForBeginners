@@ -14,3 +14,11 @@ using VegaLite
 data = dataset("iris")
 
 vscodedisplay(data)
+
+#visualize dataset
+
+v = Voyager(data)
+
+p = v[]
+
+save("iris_voyager.svg",p)
