@@ -69,3 +69,55 @@ function ci(data::Vector)
 end
 
 ci(calories)
+
+# CI binomial distributions
+
+# standart error for binomial distribution
+
+function se_binomial(p, n)
+    seb = sqrt(p * (1 - p) / n)
+    return seb
+end
+
+p = 0.72
+n = 200
+
+se_binomial(p, n)
+
+function ci_binomial(p, n)
+    interval = 1.96 * se_binomial(p, n)
+
+    lower = p - interval
+    upper = p + interval
+    
+    println("95% CI = ", p, " ± ", interval)
+    return (lower, upper)
+end
+
+ci_binomial(p, n)
+
+# tests of significance
+
+using HypothesisTests
+
+# example A/B testing
+
+difference = [-4, -7, -3, -4, -6, -1, 1, 8, -8, 1]
+
+OneSampleTTest(difference)
+
+# example training plan effectiveness testing
+
+using LinearAlgebra
+
+# observations (gözlemler)
+
+O = [175, 25, 100, 100]
+
+# expactations (beklentiler)
+
+E = [137.5, 62.5, 137.5, 62.5]
+
+# Pearson's chi-square test
+
+ChisqTest(O, normalize(E, 1))
