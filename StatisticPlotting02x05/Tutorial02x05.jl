@@ -57,3 +57,30 @@ plot!(t,predict(ols),color=:yellow,alpha=0.5,width=1)
 R² = r2(ols) #https://www.veribilimiokulu.com/r-kare-ve-duzeltilmis-r-kare/
 
 savefig(p_scatter , "regression_gr.svg")
+
+using StatsBase
+
+K = Int(round(1 + 3.322 * log(length(observations))))
+
+h = fit(Histogram,observations,nbins=K)
+
+p_histogram = bar(h.edges,h.weights,
+    xlabel = "gözlemler",
+    ylabel = "miktar",
+    title = "histogram grafiği",
+    color = :green,
+    alpha =0.5)
+
+# yoğunluk grafiği
+
+using KernelDensity
+
+d = kde(observations)
+
+p_density = plot(d.x,d.density,
+    xlabel = "observation",
+    ylabel = "density",
+    title = "density graph",
+    fill = (0, :blue),
+    alpha = 0.5
+)
