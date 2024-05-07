@@ -48,12 +48,12 @@ hline!([avg - stdev, avg, avg + stdev],
 using GLM
 using TypedTables
 
-data = Table(X=t, Y=observations)
+data = Table(X=t, Y=observations) # tabloya çevir verileri
 
-ols = lm(@formula(Y ~ X), data) # glm
+ols = lm(@formula(Y ~ X), data) # glm lineer model için hesaplma
 
 plot!(t,predict(ols),color=:yellow,alpha=0.5,width=1)
 
-R² = r2(ols)
+R² = r2(ols) #https://www.veribilimiokulu.com/r-kare-ve-duzeltilmis-r-kare/
 
 savefig(p_scatter , "regression_gr.svg")
